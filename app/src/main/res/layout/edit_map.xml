@@ -54,4 +54,28 @@
             android:text="Button 2" />
     </LinearLayout>
 
+
+    <LinearLayout  android:id="@+id/add"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button android:id="@+id/addmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="새로운 지도 추가하기"
+            android:drawableLeft="@drawable/ic_action_new"
+            />
+
+        <Button android:id="@+id/addpicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="새로운 사진 추가하기"
+            android:drawableLeft="@drawable/ic_action_new"
+            />
+
+    </LinearLayout>
 </RelativeLayout>

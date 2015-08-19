@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jong_min.test" >
 
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +21,13 @@
         <activity android:name=".MainMap"/>
         <activity android:name=".EditMap"/>
         <activity android:name=".SelectMap"/>
+        <activity android:name=".MyAlbum"/>
+        <activity android:name=".LocatePicture"/>
+        <activity android:name=".SearchHash"/>
+        <activity android:name=".UserProfile"/>
+        <activity android:name=".FeedList"/>
+
+
 
     </application>
-
 </manifest>

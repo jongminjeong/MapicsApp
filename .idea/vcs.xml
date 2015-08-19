@@ -2,6 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="C:\Users\jong-min\Downloads\Test3\MapicsApp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/MapicsApp" vcs="Git" />
   </component>
 </project>

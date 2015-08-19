@@ -13,21 +13,21 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class SelectMap extends ActionBarActivity implements Animation.AnimationListener {
+public class SearchHash extends ActionBarActivity implements Animation.AnimationListener {
     LinearLayout ln;
     Animation slideUp;
     Animation slideDown;
     ImageButton addBtn;
-    Button addMap;
-    Button addPicture;
 
     ImageButton feedBtn;
     ImageButton searchBtn;
     ImageButton mymapBtn;
     ImageButton profileBtn;
+
+    Button addMap;
+    Button addPicture;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,8 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setCustomView(R.layout.title_layout);
         TextView title = (TextView)getSupportActionBar().getCustomView().findViewById(R.id.title);
-        title.setText("지도선택");
-        setContentView(R.layout.select_map);
+        title.setText("#해쉬검색");
+        setContentView(R.layout.search_hash);
 
 
         ln = (LinearLayout)findViewById(R.id.add);
@@ -46,7 +46,6 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         searchBtn = (ImageButton)findViewById(R.id.btn_2);
         mymapBtn = (ImageButton)findViewById(R.id.btn_4);
         profileBtn = (ImageButton)findViewById(R.id.btn_5);
-
 
         slideUp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up);
         slideUp.setAnimationListener(this);
@@ -59,14 +58,15 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         addMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"이미 지도 선택 창입니다",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(SearchHash.this,SelectMap.class);
+                startActivity(intent);
             }
         });
 
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectMap.this, MyAlbum.class);
+                Intent intent = new Intent(SearchHash.this, MyAlbum.class);
                 startActivity(intent);
             }
         });
@@ -82,14 +82,14 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         feedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,FeedList.class);
+                Intent intent=new Intent(SearchHash.this,FeedList.class);
                 startActivity(intent);
             }
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,SearchHash.class);
+                Intent intent=new Intent(SearchHash.this,SearchHash.class);
                 startActivity(intent);
             }
         });
@@ -103,7 +103,7 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,UserProfile.class);
+                Intent intent=new Intent(SearchHash.this,UserProfile.class);
                 startActivity(intent);
             }
         });
@@ -128,8 +128,8 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
                 finish();
                 return true;
             case R.id.action_okay:
-                Intent intent=new Intent(SelectMap.this,EditMap.class);
-                startActivity(intent);
+                //Intent intent=new Intent(SelectMap.this,EditMap.class);
+                //startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -138,16 +138,13 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
 
     @Override
     public void onAnimationStart(Animation animation) {
-
     }
 
     @Override
     public void onAnimationEnd(Animation animation) {
-
     }
 
     @Override
     public void onAnimationRepeat(Animation animation) {
-
     }
 }

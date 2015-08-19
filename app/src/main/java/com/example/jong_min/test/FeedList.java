@@ -7,16 +7,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.lang.reflect.Field;
 
 
-public class SelectMap extends ActionBarActivity implements Animation.AnimationListener {
+public class FeedList extends ActionBarActivity implements Animation.AnimationListener {
     LinearLayout ln;
     Animation slideUp;
     Animation slideDown;
@@ -28,16 +30,17 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
     ImageButton searchBtn;
     ImageButton mymapBtn;
     ImageButton profileBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setCustomView(R.layout.title_layout);
         TextView title = (TextView)getSupportActionBar().getCustomView().findViewById(R.id.title);
-        title.setText("지도선택");
-        setContentView(R.layout.select_map);
-
+        title.setText("FEED");
+        setContentView(R.layout.feed_list);
 
         ln = (LinearLayout)findViewById(R.id.add);
         ln.setVisibility(View.INVISIBLE);
@@ -59,14 +62,15 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         addMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"이미 지도 선택 창입니다",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(FeedList.this,SelectMap.class);
+                startActivity(intent);
             }
         });
 
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectMap.this, MyAlbum.class);
+                Intent intent = new Intent(FeedList.this, MyAlbum.class);
                 startActivity(intent);
             }
         });
@@ -82,14 +86,14 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         feedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,FeedList.class);
+                Intent intent=new Intent(FeedList.this,FeedList.class);
                 startActivity(intent);
             }
         });
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,SearchHash.class);
+                Intent intent=new Intent(FeedList.this,SearchHash.class);
                 startActivity(intent);
             }
         });
@@ -103,17 +107,18 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SelectMap.this,UserProfile.class);
+                Intent intent=new Intent(FeedList.this,UserProfile.class);
                 startActivity(intent);
             }
         });
+
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_okay, menu);
+        getMenuInflater().inflate(R.menu.menu_share, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -122,32 +127,41 @@ public class SelectMap extends ActionBarActivity implements Animation.AnimationL
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        // Handle presses on the action bar items
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
-            case R.id.action_okay:
-                Intent intent=new Intent(SelectMap.this,EditMap.class);
-                startActivity(intent);
+            case R.id.edit_map:
+                return true;
+            case R.id.share_map:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    private void forceShowActionBarOverflowMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onAnimationStart(Animation animation) {
-
     }
 
     @Override
     public void onAnimationEnd(Animation animation) {
-
     }
 
     @Override
     public void onAnimationRepeat(Animation animation) {
-
     }
 }
